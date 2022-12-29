@@ -1,4 +1,6 @@
-package Graphs.ListGraph;
+package Graphs;
+
+import Graphs.ListGraph.ListGraph;
 
 public class Driver {
     public static void main(String[] args) {

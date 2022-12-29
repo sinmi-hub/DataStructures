@@ -129,7 +129,7 @@ public class ListGraph<T> {
        addVertex(destVertex);
 
        // now we can create an edge
-        index = vertices.g
+//        index = vertices.g
 
         return createEdge;
     }

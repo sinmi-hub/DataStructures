@@ -4,19 +4,19 @@ Simi Ojeyomi*/
 package GraphsTest;
 
 // importing libraries required
-import Graphs.MapWDGraph.MapWDGraph;
+import Graphs.MapGraph.MapGraph;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
-// this is a test for the MapWDGraph class
-public class MapWDGraphTest {
+// this is a test for the MapGraph class
+public class MapGraphTest {
 
     // This tests removing edges from a graph
     @Test
     public void testRemoveEdge() {
-        MapWDGraph<Character> graph= new MapWDGraph<>();
+        MapGraph<Character> graph= new MapGraph<>();
         char[] vertices = {'e', 'd', 'u', 'c'};
         char[] vertices1 = {'I', 'm','a','g'};
 
@@ -66,7 +66,7 @@ public class MapWDGraphTest {
     // both vertex are removed. Either way, the edges should not exist in graph
     @Test
     public void testRemoveVertex(){
-        MapWDGraph<String> graph= new MapWDGraph<>();
+        MapGraph<String> graph= new MapGraph<>();
         String[] vertices = {"ship", "eagle", "fat", "key", "phant",
                 "mingo", "raffe", "daddy", "nana", "jug",
                 "nala", "mur"};
@@ -103,7 +103,7 @@ public class MapWDGraphTest {
     // testing divide graph
     @Test
     public void testDivideGraph() {
-        MapWDGraph<String> graph = new MapWDGraph<>();
+        MapGraph<String> graph = new MapGraph<>();
         graph.makeVertex("A");
         graph.makeVertex("B");
         graph.makeVertex("C");
@@ -134,7 +134,7 @@ public class MapWDGraphTest {
         verticesForNewGraph.add("C");
         verticesForNewGraph.add("D");
 
-        MapWDGraph<String> newGraph;
+        MapGraph<String> newGraph;
         // TESTING DIVIDE NEW GRAPH
         newGraph = graph.spiltGraph(verticesForNewGraph);
 
@@ -163,7 +163,7 @@ public class MapWDGraphTest {
     // This tests the method predecessorsOfVertices
     @Test
     public void testPredecessors() {
-        MapWDGraph<String> graph= new MapWDGraph<>();
+        MapGraph<String> graph= new MapGraph<>();
         String[] vertices = {"ship", "eagle", "fat", "key", "phant",
                 "mingo", "raffe", "daddy", "nana", "jug",
                 "nala", "mur"};
@@ -192,7 +192,7 @@ public class MapWDGraphTest {
     // creating an edge when there is an existing edge
     @Test
     public void testCreateExistingEdge() {
-        MapWDGraph<String> graph = new MapWDGraph<>();
+        MapGraph<String> graph = new MapGraph<>();
         graph.makeVertex("A");
         graph.makeVertex("B");
         graph.makeVertex("C");
@@ -219,7 +219,7 @@ public class MapWDGraphTest {
     // testing events where edgeCost is invalid
     @Test
     public void testInvalidEdgeCost() {
-        MapWDGraph<String> graph= new MapWDGraph<>();
+        MapGraph<String> graph= new MapGraph<>();
         String[] vertices = {"ship", "eagle", "fat", "key", "phant",
                 "mingo", "raffe", "daddy", "nana", "jug",
                 "nala", "mur",};
@@ -255,7 +255,7 @@ public class MapWDGraphTest {
     // exist but no edge
     @Test
     public void testRemoveEdge1() {
-        MapWDGraph<Character> graph= new MapWDGraph<>();
+        MapGraph<Character> graph= new MapGraph<>();
         char[] vertices = {'e', 'd', 'u', 'c'};
         char[] vertices1 = {'I', 'm','a','g'};
 
@@ -280,7 +280,7 @@ public class MapWDGraphTest {
     // testing null events
     @Test
     public void testNullEvents() {
-        MapWDGraph<String> graph= new MapWDGraph<>();
+        MapGraph<String> graph= new MapGraph<>();
         String[] vertices = {"ship", "eagle", "fat", "key", "phant",
                 "mingo", "raffe", "daddy", "nana", "jug",
                 "nala", "mur"};
