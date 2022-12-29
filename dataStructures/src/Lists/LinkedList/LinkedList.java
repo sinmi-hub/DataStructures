@@ -433,18 +433,65 @@ public class LinkedList <T extends Comparable<T>> implements
      * second one.It removes alternate element. Modifies current object by
      * removing alternate elements starting with the second one*/
     public void removeEveryOther() {
-        Node current = head,prev = current;
+        Node current = head.link,prev = null;
         int count = 0;// method similar to indexing
 
         while(current != null){
             /*checks if count is at and even number and removes the element.*/
-            if(count % 2 ==0)
+            if(count % 2 != 0) {
                 prev.link = current.link;
-
+                elemCount--;
+            }
 
             prev = current;
             current = current.link;
             count++;// count increase  at every iteration of while loop
         }
+    }
+
+    /**This method searches the current linked list object for a specific value,
+     * The parameter, "value" is searched for in the current linked list by
+     * iterating through every element in the linked list. It starts by
+     * checking if there is only one element present, and checking if that
+     * element is the parameter, "value". If it is not, it also checks to see
+     * if it is the last element. Since all both of these operations are O(1)
+     * , it provides for more efficiency. If the element is not the first or
+     * last, then it loops through the entire list to find the element
+     *
+     * @param value (element to search for in the linked list)
+     * @return true if element is found
+     *          false otherwise.
+     */
+    public boolean search(T value) {
+        // checking for valid parameters
+        if (value == null)
+            throw new IllegalArgumentException();
+
+        boolean found = false;
+        Node current = head.link;// node is set to begin at first element
+
+        /* checks if the last element in the current object list is element
+         to be searched for. This promotes efficiency. First element could
+         also be searched for in a separate condition, but since the
+         iteration in the else block would go through the first element,
+         there is no need for that*/
+        if(tail != null && tail.value.compareTo(value) == 0) {
+            return true;
+        }
+
+        else {
+        /*Iterates through every element in the linked list. The loop quits
+        after the element is found*/
+            while (current != null && !found) {
+                // compares current element with parameter
+                if (current.value.compareTo(value) == 0)
+                    found = true;
+
+                /* current changes to next element in the current object*/
+                current = current.link;
+            }
+        }
+
+        return found;
     }
 }

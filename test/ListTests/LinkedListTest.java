@@ -5,6 +5,7 @@ Simi Ojeyomi*/
 package ListTests;
 
 // importing all necessary libraries
+import Lists.LinkedList.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
