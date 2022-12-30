@@ -297,4 +297,48 @@ class LinkedListTest {
             assertEquals("", list.valueAtIndex(4));
         });
     }
+
+  @Test
+    public void testSearch(){
+      LinkedList<String> animal = new LinkedList<>();
+      animal.insertion("ant");
+      animal.insertion("bat");
+      animal.insertion("cat");
+      animal.insertion("dogs");
+      animal.insertion("elephant");
+      animal.insertion("fox");
+      animal.insertion("goat");
+      animal.insertion("Donald Trump");
+      animal.insertion("Java 101");
+
+      // testing for normal linked-list
+      assertFalse(animal.search("Java101"));
+      assertTrue(animal.search("Java 101"));
+      assertTrue(animal.search("ant"));
+      assertTrue(animal.search("cat"));
+      assertTrue(animal.search("bat"));
+      assertFalse(animal.search("turkey"));
+  }
+
+  @Test
+    public void testRemoveEveryOther(){
+        LinkedList<String> streaming = new LinkedList<>();
+      streaming.insertion("Netflix");
+      streaming.insertion("Disney");
+      streaming.insertion("Hulu");
+      streaming.insertion("123Movies");
+      streaming.insertion("Peacock");
+      streaming.insertion("HBOMax");
+      streaming.insertion("Prime Video");
+      streaming.insertion("Crunchy-roll");
+
+      streaming.removeEveryOther();
+      assertEquals(4,streaming.length());
+
+      assertEquals("Netflix Hulu Peacock Prime Video",
+                                    streaming.toString());
+
+      streaming.removeEveryOther();
+      assertEquals(2,streaming.length());
+  }
 }
