@@ -22,10 +22,10 @@ public class MapGraphTest {
 
         // ---------creating vertices for the graph---------------
         for(char Vertex: vertices)
-            graph.makeVertex(Vertex);
+            graph.addVertex(Vertex);
 
         for(char Vertex: vertices1)
-            graph.makeVertex(Vertex);
+            graph.addVertex(Vertex);
 
         // ------------ creating edges for the graph--------------------
         for(int i = 0; i < 4;i++) {
@@ -74,7 +74,7 @@ public class MapGraphTest {
         int j = 22;
         //----creating vertex
         for(int i = 0; i < vertices.length - 1;i++) {
-            graph.makeVertex(vertices[i]);
+            graph.addVertex(vertices[i]);
             //--creating edge
             graph.makeEdge(vertices[i],vertices[i+1], j - 2);
         }
@@ -87,7 +87,7 @@ public class MapGraphTest {
 
 
         // removing 1 vertex
-        graph.removeVertex(vertices[7]);// removing daddy
+        graph.deleteVertex(vertices[7]);// removing daddy
 
         // checking if edges exist from any of those values
         assertEquals(-1, graph.edgeWeight("raffe", "daddy"));// no weighted edge
@@ -104,11 +104,11 @@ public class MapGraphTest {
     @Test
     public void testDivideGraph() {
         MapGraph<String> graph = new MapGraph<>();
-        graph.makeVertex("A");
-        graph.makeVertex("B");
-        graph.makeVertex("C");
-        graph.makeVertex("D");
-        graph.makeVertex("E");
+        graph.addVertex("A");
+        graph.addVertex("B");
+        graph.addVertex("C");
+        graph.addVertex("D");
+        graph.addVertex("E");
 
         graph.makeEdge("C", "D", 1);
         graph.makeEdge("B", "E", 2);
@@ -171,7 +171,7 @@ public class MapGraphTest {
         int j = 22;
         //----creating vertex
         for(int i = 0; i < vertices.length - 1;i++) {
-            graph.makeVertex(vertices[i]);
+            graph.addVertex(vertices[i]);
             //--creating edge
             graph.makeEdge(vertices[i],vertices[i+1], j - 2);
         }
@@ -193,11 +193,11 @@ public class MapGraphTest {
     @Test
     public void testCreateExistingEdge() {
         MapGraph<String> graph = new MapGraph<>();
-        graph.makeVertex("A");
-        graph.makeVertex("B");
-        graph.makeVertex("C");
-        graph.makeVertex("D");
-        graph.makeVertex("E");
+        graph.addVertex("A");
+        graph.addVertex("B");
+        graph.addVertex("C");
+        graph.addVertex("D");
+        graph.addVertex("E");
 
         graph.makeEdge("C", "D", 1);
         graph.makeEdge("B", "E", 2);
@@ -228,13 +228,13 @@ public class MapGraphTest {
         int j = 22;
         //----creating vertex
         for(int i = 0; i < vertices.length - 1;i++) {
-            graph.makeVertex(vertices[i]);
+            graph.addVertex(vertices[i]);
             //--creating edge
             graph.makeEdge(vertices[i],vertices[i+1], j - 2);
         }
 
-        graph.makeVertex(vertices1[0]);
-        graph.makeVertex(vertices1[1]);
+        graph.addVertex(vertices1[0]);
+        graph.addVertex(vertices1[1]);
 
         // creating more edges
         graph.makeEdge(vertices[0], vertices[6], 100);
@@ -261,11 +261,11 @@ public class MapGraphTest {
 
         // ---------creating vertices for the graph---------------
         for(char Vertex: vertices)
-            graph.makeVertex(Vertex);
+            graph.addVertex(Vertex);
 
         for(char Vertex: vertices1)
-            graph.makeVertex(Vertex);
-        graph.makeVertex('x');
+            graph.addVertex(Vertex);
+        graph.addVertex('x');
 
         // ------------ creating edges for the graph--------------------
         for(int i = 0; i < 4;i++) {
@@ -288,7 +288,7 @@ public class MapGraphTest {
         int j = 22;
         //----creating vertex
         for(int i = 0; i < vertices.length - 1;i++) {
-            graph.makeVertex(vertices[i]);
+            graph.addVertex(vertices[i]);
             //--creating edge
             graph.makeEdge(vertices[i],vertices[i+1], j - 2);
         }
@@ -302,7 +302,7 @@ public class MapGraphTest {
                 () -> {
             graph.verticesNeighbors(null);
             graph.makeEdge(null, "daddy", j);
-            graph.makeVertex(null);
+            graph.addVertex(null);
             assertNull(graph.spiltGraph(null));
             graph.edgeWeight("ship", null);
             graph.edgeWeight(null, "raffe");
@@ -310,7 +310,7 @@ public class MapGraphTest {
             graph.verticesPredecessors(null);
             graph.removeEdge(null, "nana");
             graph.removeEdge("jug", null);
-            graph.removeVertex(null);
+            graph.deleteVertex(null);
                 });
 
     }
