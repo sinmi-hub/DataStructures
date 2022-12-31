@@ -207,13 +207,13 @@ public class Driver {
         System.out.print("New list created. New List contains: ");
         System.out.print(list1);
         System.out.println("\n--------------------------------------------");
-        list1.filtration(5);
+        list1.intFilter(5);
         System.out.println("Removing any element greater than 5: ");
         System.out.print("Current list: "+list1);
         System.out.println("\n--------------------------------------------");
         System.out.println("Making the element at position 3 the end of the " +
                 "list: ");
-        list1.moveToEnd(3);
+        list1.makeNewList(3);
         System.out.println("Current List: " + list1);
         System.out.println("--------------------------------------------");
 

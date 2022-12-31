@@ -129,13 +129,13 @@ public class LinkedList <T extends Comparable<T>> implements
         /* the while loop below traverses the current object */
         while (current != tail.link) {// check if is not at end yet
 
-            /*
-             * if it is at the last element, it prints without space, else it
-             * adds space after printing each element
-             */
-            if (current == tail) {// checks if it is at last element
+            /* if it is at the last element, it prints without space, else it
+             * adds space after printing each element*/
+            // checks if it is last element
+            if (current == tail) {
                 printList.append(current.value);// updates printList
-            } else
+            }
+            else
                 printList.append(current.value).append(" ");
 
             current = current.link;// current points to next element
@@ -431,7 +431,9 @@ public class LinkedList <T extends Comparable<T>> implements
 
     /**This method removes element in every other node starting from the
      * second one.It removes alternate element. Modifies current object by
-     * removing alternate elements starting with the second one*/
+     * removing alternate elements starting with the second one. This means
+     * that all elements with odd numbered index are removed from the current
+     * objList.*/
     public void removeEveryOther() {
         Node current = head.link,prev = null;
         int count = 0;// method similar to indexing
@@ -440,6 +442,7 @@ public class LinkedList <T extends Comparable<T>> implements
             /*checks if count is at and even number and removes the element.*/
             if(count % 2 != 0) {
                 prev.link = current.link;
+                tail = prev;// the value of tail is always reset until loop ends
                 elemCount--;
             }
 
