@@ -6,8 +6,8 @@ package Graphs.ListGraph;
 import Graphs.Graphs;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.Collection;
 
 /*This class, ListGraph, is a class that implements the graph data structure
 using only list. Implementing graphs this way is definitely not efficient, as
@@ -38,6 +38,7 @@ public class ListGraph<T> extends Graphs<T> {
         neighbors = new ArrayList<>();
     }
 
+
     /**This method adds a vertex to the current ListGraph Object.  If
      * dataForVertex already exist as a vertex in the graph, false
      * is returned without modifying anything. However, if it does not,
@@ -47,6 +48,7 @@ public class ListGraph<T> extends Graphs<T> {
      * @return true if vertex was successfully added
      *          false otherwise
      */
+    @Override
     public boolean addVertex(T vertex){
         boolean status = false;
 
@@ -55,7 +57,7 @@ public class ListGraph<T> extends Graphs<T> {
             throw new IllegalArgumentException("Vertex to add cannot be null");
 
         /* checks if the vertex exist in the graph first, before adding vertex
-        * to the graph*/
+         * to the graph*/
         if(!vertices.contains(vertex)){
             // adds vertex to graph if it did not previously exist
             vertices.add(vertex);
@@ -69,12 +71,6 @@ public class ListGraph<T> extends Graphs<T> {
 
         return status;
     }
-
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> alpha
 
     /**This method removes the parameter,"vertex" from the current objList.
      * It does this by first removing any edges that the vertx might have,
@@ -110,31 +106,18 @@ public class ListGraph<T> extends Graphs<T> {
             arrayList that might store an outgoing edge to parameter, "vertex*/
             for(ArrayList<T> allEdges: neighbors) {
                 allEdges.remove(vertex);
-<<<<<<< HEAD
             }
-
             // removing the vertex itself from the current ListGraph object
             remove = vertices.remove(vertex);
-=======
-                remove = true;
-            }
-
-            // removing the vertex itself from the current ListGraph object
-            vertices.remove(vertex);
->>>>>>> alpha
         }
 
         return remove;
     }
 
-<<<<<<< HEAD
->>>>>>> Stashed changes
-=======
->>>>>>> alpha
     /**This method counts the number of vertex in the graph and returns it.
      * It checks for the total number of vertices in the graph and returns it.
      *
-     * @return number of vertices that is currently in the graph object
+     * @return number of vertices in teh current graph
      */
     @Override
     public int getVertexCount(){
@@ -149,23 +132,12 @@ public class ListGraph<T> extends Graphs<T> {
      * instead for proper efficiency.
      *
      * @param vertexToFind (vertex to search for)
-     * @return true if parameter, vertex is found in current ListGraph object
-     *          false otherwise
-     *
+     * @return true if parameter, vertex is in the current graph object
+     *          false otherwise.
      */
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-    public boolean isVertex(T vertexToFind){
-=======
-    @Override
-    public boolean findVertex(T vertexToFind){
->>>>>>> alpha
-        boolean found ;
-=======
     @Override
     public boolean findVertex(T vertexToFind){
         boolean found;
->>>>>>> Stashed changes
 
         /* this line evaluates the arraylist of vertices, by using the
          * contains method to check if vertexToFind is in the graph. If it
@@ -175,47 +147,17 @@ public class ListGraph<T> extends Graphs<T> {
         return found;
     }
 
-    /**This method returns an object of a class that implements the java
-     * collection interface, that contains all the neighbors that the vertex,
-     * "dataForVertex" has in the current object graph. If there is no vertex,
-     * dataForVertex, in current object graph, null is returned. If it is
-     * present, but has no neighbors, an empty collection is simply returned
-     *
-     * @param vertex (vertex to find its neighbors)
-     * @return Collection of adjacent vertices of the parameter, vertex
-     */
-    @Override
-    public Collection<T> verticesNeighbors(T vertex) {
-        Collection<T> vertxOutgoingEdge = null;
-        int index;
-
-        // checking for valid parameters
-        if(vertex == null)
-            throw new IllegalArgumentException();
-
-        // check to see that vertex is currently in the list graph object
-        if(findVertex(vertex)){
-            // gets the index location of where vertex is stored in graph
-            index = vertices.indexOf(vertex);
-            /* all the outgoing edges connected to vertex is stored at that
-            same index in a different arrayList*/
-            vertxOutgoingEdge = neighbors.get(index);
-        }
-
-        return vertxOutgoingEdge;
-    }
-
     /**This method creates an edge between the two vertices specified in
      * parameter. If the source vertex has an outgoing edge to the destVertex,
      * this makes it a directed graph. If the destVertex also has an outgoing
      * vertex to the same source vertex, this makes the current ListGraph
      * object an undirected graph. We create an edge by getting the index of
      * the source vertex. The same index is used to access the neighbor
-     * arrayList. The destVertex is then added to the arrayList that stores
+     * collection. The destVertex is then added to the arrayList that stores
      * the sourceVertex neighbors
      *
      * @param sourceVertex (vertex from which edge starts from)
-     * @param destVertex (vertex to which edge ends)
+     * @param destVertex  (vertex to which edge ends)
      * @return true if edge was created successfully or false otherwise
      */
     public boolean addEdge(T sourceVertex, T destVertex){
@@ -236,19 +178,11 @@ public class ListGraph<T> extends Graphs<T> {
         addVertex(destVertex);
 
         // now we can get the index where source vertex is stored
-       index = vertices.indexOf(sourceVertex);
+        index = vertices.indexOf(sourceVertex);
        /* Using that same index, we access the arrayList that stores all
         // outgoing edges of sourceVertex*/
         ArrayList<T> srcVertxNeighbors = neighbors.get(index);
 
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-       // now we can create an edge
-//        index = vertices.g
-
-        return createEdge;
-    }
-=======
         // checking to see if there was already an existing edge
         if(!srcVertxNeighbors.contains(destVertex)) {
             // add dest vertex to srcVertxNeighbors
@@ -257,17 +191,6 @@ public class ListGraph<T> extends Graphs<T> {
 
         return createEdge;
     }
-=======
-        // checking to see if there was already an existing edge
-        if(!srcVertxNeighbors.contains(destVertex)) {
-            // add dest vertex to srcVertxNeighbors
-            srcVertxNeighbors.add(destVertex);// creating edge...
-            createEdge = true;
-        }
-
-        return createEdge;
-    }
->>>>>>> alpha
 
     /**This method removes an edge between the two vertices specified in
      * parameter. If the source vertex has an outgoing edge to the destVertex,
@@ -342,17 +265,42 @@ public class ListGraph<T> extends Graphs<T> {
         return vertexIncomingEdge;
     }
 
+    /**This method returns an object of a class that implements the java
+     * collection interface, that contains all the neighbors that the vertex,
+     * "dataForVertex" has in the current object graph. If there is no vertex,
+     * dataForVertex, in current object graph, null is returned. If it is
+     * present, but has no neighbors, an empty collection is simply returned
+     *
+     * @param vertex (vertex to find its neighbors)
+     * @return Collection of adjacent vertices of the parameter, vertex
+     */
+    @Override
+    public Collection<T> verticesNeighbors(T vertex) {
+        Collection<T> vertxOutgoingEdge = null;
+        int index;
+
+        // checking for valid parameters
+        if(vertex == null)
+            throw new IllegalArgumentException();
+
+        // check to see that vertex is currently in the list graph object
+        if(findVertex(vertex)){
+            // gets the index location of where vertex is stored in graph
+            index = vertices.indexOf(vertex);
+            /* all the outgoing edges connected to vertex is stored at that
+            same index in a different arrayList*/
+            vertxOutgoingEdge = neighbors.get(index);
+        }
+
+        return vertxOutgoingEdge;
+    }
+
     @Override
     public String toString() {
         return "The vertices are: " + vertices + ", and the edges are"
                 + neighbors;
     }
 
-<<<<<<< HEAD
-=======
-    //todo
-
->>>>>>> alpha
     /**This method clears the entire current list graph object. It does this
      * by clearing the arraylist that stores the vertices of the current list
      * graph object and at the same time clears the list, that stores the
@@ -364,7 +312,6 @@ public class ListGraph<T> extends Graphs<T> {
         vertices.clear();
         neighbors.clear();
     }
-<<<<<<< HEAD
 
     /**This method returns the number of edges that are present at any time
      * in the current ListGraph Object. This is done by simply iterating
@@ -384,7 +331,4 @@ public class ListGraph<T> extends Graphs<T> {
 
         return numEdges;
     }
->>>>>>> Stashed changes
-=======
->>>>>>> alpha
 }
