@@ -38,11 +38,11 @@ public class Driver {
 
         System.out.println("List1 is: ");
         System.out.println(list1);
-        list1.filtration(5);
+        list1.intFilter(5);
 
         System.out.println(list1);
         System.out.println("Making the node at position 3 the end of the list");
-        list1.moveToEnd(3);
+        list1.makeNewList(3);
         System.out.println("List1: " + list1);
 
         System.out.println("Moving the last to the beginning");

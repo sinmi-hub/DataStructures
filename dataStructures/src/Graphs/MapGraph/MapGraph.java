@@ -18,13 +18,15 @@ package Graphs.MapGraph;
  * a string, and this is stored. The corresponding weight of each edge is also
  * stored in dwGraphEdge*/
 
+import Graphs.Graphs;
+
 import java.util.LinkedList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MapGraph<V extends Comparable<V>> {
+public class MapGraph<V extends Comparable<V>> extends Graphs<V> {
     /*dwGraphVertex stores all the vertices in the graph and its neighbors*/
     private Map<V, List<V>> dwGraphVertex;
 
@@ -42,7 +44,8 @@ public class MapGraph<V extends Comparable<V>> {
         dwGraphEdge = new HashMap<>();
     }
 
-    /**This method adds a new vertex, "dataForVertex" to its current graph
+
+    /** This method adds a new vertex, "dataForVertex" to its current graph
      * object. If dataForVertex already exist as a vertex in the graph, false
      * is returned without changing anything. However, if it does not,
      * dataForVertex is created and true is returned.
@@ -52,8 +55,8 @@ public class MapGraph<V extends Comparable<V>> {
      *         dataForVertex). Returns false if dataForVertex was already a key
      *         in the map(dataForVertex is not created)
      */
-
-    public boolean makeVertex(V dataForVertex) {
+    @Override
+    public boolean addVertex(V dataForVertex) {
         boolean vertexStatus = false;
 
         // checks for valid parameters
@@ -111,6 +114,16 @@ public class MapGraph<V extends Comparable<V>> {
         return new LinkedList<>(dwGraphVertex.keySet());
     }
 
+    /**This method counts the number of vertex in the graph and returns it.
+     * It checks for the total number of vertices in the graph and returns it.
+     *
+     * @return number of vertices in teh current graph
+     */
+    @Override
+    public int getVertexCount() {
+        return getAllVertices().size();
+    }
+
     /**This method adds a new (directed) edge to its current object graph, that
      * goes from sourceVertex to destVertex, and this edge should have a
      * weight,"weight". This method returns false and is modified if weight is
@@ -140,9 +153,9 @@ public class MapGraph<V extends Comparable<V>> {
              * that they exist in the current graph object. Creating an edge
              * without vertices does not make sense since an edge connects two
              * vertices*/
-            makeVertex(sourceVertex);// creates sourceVertex if it did not
+            addVertex(sourceVertex);// creates sourceVertex if it did not
             // previously exist
-            makeVertex(destVertex);// if destVertex exists, nothing is done
+            addVertex(destVertex);// if destVertex exists, nothing is done
 
             /*string representation of where the edge starts and end from will
              * only be created if both vertices exist */
@@ -253,7 +266,7 @@ public class MapGraph<V extends Comparable<V>> {
         return status;
     }
 
-    /**This method removes the vertex, dataForVertex from the current graph
+    /** This method removes the vertex, dataForVertex from the current graph
      * object, and all its associated edges. if dataForVertex is not in the
      * current graph object, false is returned without changing anything.
      * However, if it does, all its associated edges, both incoming and
@@ -263,7 +276,8 @@ public class MapGraph<V extends Comparable<V>> {
      * @param dataForVertex (vertex to remove)
      * @return false if dataForVertex does not exist, true otherwise
      */
-    public boolean removeVertex(V dataForVertex) {
+    @Override
+    public boolean deleteVertex(V dataForVertex) {
         boolean vertexStatus = false;
 
         /*String representation of how dataForVertex is stored in the graph if
@@ -353,6 +367,7 @@ public class MapGraph<V extends Comparable<V>> {
         return adjVertCollection;
     }
 
+
     /**This method returns an object of a class that implements the java
      * collection interface, that contains all the vertices that have an
      * outgoing edge to the vertex, "destVertex" in the current object graph.
@@ -435,7 +450,7 @@ public class MapGraph<V extends Comparable<V>> {
              * from old graph
              */
             if (findVertex(vertex)) {
-                newGraph.makeVertex(vertex);// adds vertex to new graph
+                newGraph.addVertex(vertex);// adds vertex to new graph
 
                 // NOW, ADD ALL EDGES ASSOCIATED WITH VERTEX TO THE NEW GRAPH
                 /*
@@ -456,7 +471,7 @@ public class MapGraph<V extends Comparable<V>> {
                      * vertex to the new graph (verticesForNewGraph)
                      */
                     if (verticesForNewGraph.contains(vertexNeighb)) {
-                        newGraph.makeVertex(vertexNeighb);// adds vertex
+                        newGraph.addVertex(vertexNeighb);// adds vertex
                         // to new graph
 
                         // STEP 2 - SINCE KNOW THERE IS AN EDGE, THERE MUST
@@ -487,10 +502,16 @@ public class MapGraph<V extends Comparable<V>> {
         //-----CURRENT GRAPH-------------------------------------------
 
         for (V v : verticesToRemove)
-            removeVertex(v);// remove every vertex in
+            deleteVertex(v);// remove every vertex in
         // this collection from current
         // graph
 
         return newGraph;
+    }
+
+    @Override
+    public String toString() {
+        return "The vertices in graph are: " + dwGraphVertex + ", and " +
+                "the edges are" + dwGraphEdge;
     }
 }

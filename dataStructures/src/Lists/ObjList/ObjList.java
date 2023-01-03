@@ -148,7 +148,8 @@ public class ObjList implements Iterable<Object> {
     }
 
 
-    /**This method returns the number element that are present at anytime in the current objList
+    /**This method returns the number element that are present at anytime in
+     * the current objList
      *
      * @return length of objList
      */
@@ -197,47 +198,56 @@ public class ObjList implements Iterable<Object> {
     }
 
     /**
-     * This method removes any element that is greater than the parameter boundary
+     * This method removes any element that is only greater than the parameter
+     * boundary
      * from the nested list.As the list is traversed, each element is
      * compared to parameter and if it is greater than, it is removed from
-     * the list, leaving all the elements in the list in the same order.
+     * the list, leaving all the elements in the list in the same order. This
+     * method mostly works for integers only, as it filtrates an objList that
+     * contains purely integers. It does not remove the value of the boundary
+     * itself if present. If the boundary is higher than the biggest element
+     * in objList, nothing happens
      *
      * @param boundary parameter to compare and serve as filter
      */
-    public void filtration(int boundary) {
+    public void intFilter(int boundary) {
+
         /* local variables are used here, current is set to second element,
         while prev is set to first element*/
-        Node current = head.link, prev = head;
+        Node current = head;
 
 
         while (current != null) {
+            // checking the head data to see if it should be cutoff
             if ((Integer) head.data > boundary) {// compares the first element
                 head = head.link;
+                objCount--;
             }
 
             /*Compares every other element and removes if current element
              * is greater than the boundary*/
             else if ((Integer) current.data > boundary) {
-                prev.link = current.link;
-                current = current.link;
+                current.prev.link = current.link;
+                objCount--;
             }
 
-            prev = current;// change prev to current
             current = current.link;// moves current to next one
         }
     }
 
     /**
      * This method modifies the current object list, by making the node at
-     * numNodes, the new head in the list and moving all the element before
-     * it to the back without changing the order.
+     * index numNodes, the new head in the list and moving all the element
+     * before it to the back . This in turn changes the original order of the
+     * elements in the current objList. This method uses zero indexing which
+     * means index starts at zero.
      *
-     * @param numNodes (The position at which to make the new head of the list)
+     * @param numNodes (The index at which to make the new head of the list)
      */
-    public void moveToEnd(int numNodes) {
+    public void makeNewList(int numNodes) {
         Node current = head, prev = null, newHead;
         int i = 0;// to keep count of where the head to start, similar to
-        // indexing
+                    // indexing
 
         // must be a valid position in objectList to change the head
         if (numNodes > 0) {
@@ -269,57 +279,116 @@ public class ObjList implements Iterable<Object> {
     last node to the beginning. This is the opposite of moveEnd*/
     public void moveLastToBegin() {
         //use of local variables instead of global ones
-        Node current = tail, prev = tail.prev, newHead;
+        Node current = tail, newHead;
 
         /* sets the last element and the newHead and changes the pointer
          from null to the first element in the list. The actual head of the
          list is then changed newHead*/
         newHead = current;
-        current.link = head;
-        head = newHead;
+        current.link = head;// changes the pinter of tail from null to head
+        head = newHead;// head becomes newHead
 
-        prev.link = null;//detaches the pointer of prev and changes it to null
+        current.prev.link = null;//detaches the pointer of prev and changes it
+                                 // to null
 
     }
 
+
     /**
      * This method removes element in the list starting from x and up to y.
-     * It removes X and Y inclusive. Checking begin == null prevents duplication
-     * checking begins != null makes sure begin must be found
+     * It removes X and Y inclusive. if x and y are equal, it would simply
+     * remove the number itself it is present. This serves as a remove method
+     * and a remove method specifying positions. The local variables begin,
+     * and end serve as placeholders to store the position of a node when a
+     * certain object is found. When begin position and end position is
+     * found, then removal is possible.
      *
      * @param x (position to begin removing)
      * @param y (position to stop removing)
      */
     public void removeFromTo(Object x, Object y) {
-        //begin and end serve as placeholders to store the position of a
-        // node when a certain object is found
+        int count = 0;// counts number of element that is removed
 
-        if(x == null || y == null)
+        // checking for valid parameters
+        if (x == null || y == null)
             throw new IllegalArgumentException("Invalid object detected");
 
-        Node current = head, prev = current, begin = null, end = null;
+        Node current = head;// set current node to the head
+        Node begin = null, end = null;
 
-        while (current != null) {
-            /* if it finds the position to start from, AND there are no
-            duplicates of x in the list, begin stores the node position or
-            the node BEFORE the node that contains object x*/
-            if (current.data.equals(x) && begin == null)
-                begin = prev;
+        // while loop to iterate through object list
+        while(current != null && end == null){
 
-            /* if it finds the position to start end, AND begin is not empty,
-            which means the element to start from has been found, end
-            the node that contains object y*/
-            if (current.data.equals(y) && begin != null) {
-                end = current;
+            /* if first occurrence of parameter, 'x' is found, this is marked
+            the beginning position to remove*/
+            if(current.data.equals(x) && begin == null){
+                begin = current;// begin stores position to start removing
             }
 
-            prev = current;
-            current = current.link;
+            /* if the ending position is found, end stores the position. This
+             means that begin position to start removal must not be null*/
+            if (current.data.equals(y) && begin != null) {
+                end = current;// end stores position to stop removing
+            }
+
+            /* if the first element to be removed is found, count is increased
+            * This will keep increasing until end is also found and not equal
+            *  to null. When this happens, while loop will exit*/
+            if(begin != null)
+                count++;
+
+            current = current.link;// current node is set to next one in objList
         }
 
-        // if both are not empty, which means begin and end position was found,
-        // elements are removed
-        if (begin != null && end != null)
-            begin.link = end.link;
+        // if position to start removing is the head, then there is no
+        // previous element, which means prev cannot be accessed
+        if(begin == head){
+            head = end.link;
+            objCount -= count;
+        }
+
+        // both positions must be found to be able to do any kind of removal
+        else if(begin!= null && end != null){
+            begin.prev.link = end.link;
+            // reduces number of element by wha was removed
+            objCount = objCount - count;
+        }
+
+
+    }
+
+    /**This method clears the object list and removes every element in the
+     * current objectList. It does this by changing the pointer of head to
+     * the reference the pointer of tail, which is null. In terms of memory
+     * storage, these are not actually removed. There are simply de-referenced
+     *
+     */
+    public void clear(){
+        head = tail.link;
+        objCount = 0;// resets length of current objectList
+    }
+
+    /**This method searches the entire current objList for the parameter,"value"
+     * If value is found, true is returned, otherwise. false is simply return
+     *
+     * @param value (object to search for in current objLiat
+     * @return true if object is found
+     *          false otherwise
+     */
+    public boolean search(Object value){
+        boolean found = false;
+        Node current = head;
+
+        // Iterate through the whole objectList
+        while(current != null && !found){
+
+            // if value is found, flag changes and loop exits
+            if(current.data.equals(value))
+                found = true;
+
+            current = current.link;// current changes to next element in objList
+        }
+
+        return found;
     }
 }

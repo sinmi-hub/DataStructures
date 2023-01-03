@@ -2,13 +2,13 @@
 Simi Ojeyomi*/
 
 
-/*This class represents a class that stores data the way a NormalLinkedList
+/*This class represents a class that stores data the way a LinkedList
  * does, but it only stores or adds the element in order. As a result,
- * all the nodes are in order. This class is a child class of NormalLinkedList,
- * and it inherits most of the methods from a NormalLinkedList class,
+ * all the nodes are in order. This class is a child class of LinkedList,
+ * and it inherits most of the methods from a LinkedList class,
  *although some are overridden to actually enhance efficiency. The add method
  * is overridden to actually add the elements in order unlike the
- * NormalLinkedList class*/
+ * LinkedList class*/
 package Lists.LinkedList;
 
 
@@ -165,5 +165,4 @@ public class SortedLinkedList<T extends Comparable<T>>
 
         super.elemCount = super.elemCount - count;//updating the length
     }
-
 }
