@@ -70,6 +70,11 @@ public class ListGraph<T> extends Graphs<T> {
         return status;
     }
 
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+=======
+=======
+>>>>>>> alpha
 
     /**This method removes the parameter,"vertex" from the current objList.
      * It does this by first removing any edges that the vertx might have,
@@ -105,16 +110,27 @@ public class ListGraph<T> extends Graphs<T> {
             arrayList that might store an outgoing edge to parameter, "vertex*/
             for(ArrayList<T> allEdges: neighbors) {
                 allEdges.remove(vertex);
+<<<<<<< HEAD
+            }
+
+            // removing the vertex itself from the current ListGraph object
+            remove = vertices.remove(vertex);
+=======
                 remove = true;
             }
 
             // removing the vertex itself from the current ListGraph object
             vertices.remove(vertex);
+>>>>>>> alpha
         }
 
         return remove;
     }
 
+<<<<<<< HEAD
+>>>>>>> Stashed changes
+=======
+>>>>>>> alpha
     /**This method counts the number of vertex in the graph and returns it.
      * It checks for the total number of vertices in the graph and returns it.
      *
@@ -137,9 +153,19 @@ public class ListGraph<T> extends Graphs<T> {
      *          false otherwise
      *
      */
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+    public boolean isVertex(T vertexToFind){
+=======
     @Override
     public boolean findVertex(T vertexToFind){
+>>>>>>> alpha
         boolean found ;
+=======
+    @Override
+    public boolean findVertex(T vertexToFind){
+        boolean found;
+>>>>>>> Stashed changes
 
         /* this line evaluates the arraylist of vertices, by using the
          * contains method to check if vertexToFind is in the graph. If it
@@ -215,6 +241,23 @@ public class ListGraph<T> extends Graphs<T> {
         // outgoing edges of sourceVertex*/
         ArrayList<T> srcVertxNeighbors = neighbors.get(index);
 
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+       // now we can create an edge
+//        index = vertices.g
+
+        return createEdge;
+    }
+=======
+        // checking to see if there was already an existing edge
+        if(!srcVertxNeighbors.contains(destVertex)) {
+            // add dest vertex to srcVertxNeighbors
+            createEdge = srcVertxNeighbors.add(destVertex);// creating edge...
+        }
+
+        return createEdge;
+    }
+=======
         // checking to see if there was already an existing edge
         if(!srcVertxNeighbors.contains(destVertex)) {
             // add dest vertex to srcVertxNeighbors
@@ -224,6 +267,7 @@ public class ListGraph<T> extends Graphs<T> {
 
         return createEdge;
     }
+>>>>>>> alpha
 
     /**This method removes an edge between the two vertices specified in
      * parameter. If the source vertex has an outgoing edge to the destVertex,
@@ -304,8 +348,11 @@ public class ListGraph<T> extends Graphs<T> {
                 + neighbors;
     }
 
+<<<<<<< HEAD
+=======
     //todo
 
+>>>>>>> alpha
     /**This method clears the entire current list graph object. It does this
      * by clearing the arraylist that stores the vertices of the current list
      * graph object and at the same time clears the list, that stores the
@@ -317,4 +364,27 @@ public class ListGraph<T> extends Graphs<T> {
         vertices.clear();
         neighbors.clear();
     }
+<<<<<<< HEAD
+
+    /**This method returns the number of edges that are present at any time
+     * in the current ListGraph Object. This is done by simply iterating
+     * through the list, "neighbors", which stores all the edges of every
+     * single vertex present in the current ListGraph object and return the
+     * sum of their size. If there is no edge present in the graph, then zero
+     * is returned
+     *
+     * @return The number of edges present in the current ListGraph object
+     */
+    public int getEdgesCount(){
+        int numEdges = 0;
+
+        // Iterating through neighbors
+        for(ArrayList<T> storeEdge: neighbors)
+            numEdges += storeEdge.size();// sums up the size of every arrayList
+
+        return numEdges;
+    }
+>>>>>>> Stashed changes
+=======
+>>>>>>> alpha
 }
