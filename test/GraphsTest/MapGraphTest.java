@@ -193,12 +193,15 @@ public class MapGraphTest {
     @Test
     public void testCreateExistingEdge() {
         MapGraph<String> graph = new MapGraph<>();
+
+        // creates vertices for the current graph object
         graph.addVertex("A");
         graph.addVertex("B");
         graph.addVertex("C");
         graph.addVertex("D");
         graph.addVertex("E");
 
+        // creates edges for the current vertices in the graph
         graph.makeEdge("C", "D", 1);
         graph.makeEdge("B", "E", 2);
         graph.makeEdge("A", "B", 3);
@@ -211,6 +214,7 @@ public class MapGraphTest {
         graph.makeEdge("C", "B", 8);
         graph.makeEdge("E", "D", 9);
 
+        // test when edges can be made and when they cannot
         assertTrue(graph.makeEdge("C", "D", 2));
         assertFalse(graph.makeEdge("C", "D", -2));
         assertEquals(2, graph.edgeWeight("C", "D"));
@@ -244,6 +248,8 @@ public class MapGraphTest {
 
         graph.removeEdge(vertices[0], vertices[6]);
 
+        // testing edgeWeight when an edge does not exist between the 2
+        // vertices or when the vertices do not exist
         assertEquals(-1, graph.edgeWeight(vertices[0], vertices[6]));
         assertEquals(-1, graph.edgeWeight(vertices1[0], vertices1[1]));
         assertEquals(-1, graph.edgeWeight("me", "daddy"));
@@ -298,6 +304,8 @@ public class MapGraphTest {
         graph.makeEdge(vertices[3], vertices[9], 200);
         graph.makeEdge(vertices[6], vertices[10], 300);
         graph.makeEdge(vertices[9], vertices[11], 400);
+
+        // testing null events that should occur
         assertThrows(IllegalArgumentException.class,
                 () -> {
             graph.verticesNeighbors(null);
