@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2023.  You are welcome to use freely. Sinmi
+ */
+
 package Graphs;
 
 import java.util.Collection;
