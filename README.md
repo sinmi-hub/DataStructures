@@ -7,4 +7,4 @@ this repository include:
 Inheritance, Polymorphism, Encapsulation, and
 Abstraction.
 
-Data Structures by Tobi Cinquante.
+Data Structures by Simi.
